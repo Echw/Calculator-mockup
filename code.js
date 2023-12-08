@@ -38,7 +38,9 @@ const calculator = {
       case "+":
         this.addition();
         break;
-
+      case "-":
+        this.subtract();
+        break;
       default:
         break;
     }
@@ -58,6 +60,14 @@ const calculator = {
     for (let i = 0; i < this.numbers.length; i++) {
       this.displayValue += this.numbers[i];
     }
+    this.updateDisplay();
+  },
+  subtract() {
+    let result = this.numbers[0];
+    for (let i = 1; i < this.numbers.length; i++) {
+      result -= this.numbers[i];
+    }
+    this.displayValue = result;
     this.updateDisplay();
   },
 
