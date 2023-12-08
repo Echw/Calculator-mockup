@@ -6,6 +6,7 @@ const calculator = {
   clickedNumber: "",
   firstValue: undefined,
   secondValue: undefined,
+  numbers: [],
   clickedMathMark: undefined,
   mathClicked: false,
 
@@ -17,11 +18,14 @@ const calculator = {
         this.displayValue = this.firstValue;
         this.updateDisplay();
       } else if (e.target.innerText == "=") {
+        this.numbers.push(parseInt(this.display.value));
         this.mathClicked = true;
         this.math(this.clickedMathMark);
       } else if (e.target.classList.contains("math")) {
+        this.numbers.push(parseInt(this.display.value));
         this.mathClicked = true;
-        this.secondValue = this.firstValue;
+        this.firstValue = parseInt(e.target.innerText);
+        this.displayValue = this.numbers[this.numbers.length - 1];
         this.clickedMathMark = e.target.innerText;
         this.firstValue = this.displayValue = 0;
         this.updateDisplay();
@@ -51,9 +55,10 @@ const calculator = {
   },
 
   addition() {
-    this.displayValue = this.firstValue + this.secondValue;
+    for (let i = 0; i < this.numbers.length; i++) {
+      this.displayValue += this.numbers[i];
+    }
     this.updateDisplay();
-    console.log(this.displayValue, this.firstValue, this.secondValue);
   },
 
   init() {
