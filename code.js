@@ -3,31 +3,39 @@ const calculator = {
   buttons: document.querySelector(".buttons"),
   clear: document.querySelector("#clear"),
   displayValue: 0,
-  clickedNumber: "",
-  firstValue: undefined,
-  secondValue: undefined,
-  numbers: [],
+  firstNumber: 0,
+  secondNumber: 0,
   clickedMathMark: undefined,
   mathClicked: false,
 
   initEventListeners() {
     this.buttons.addEventListener("click", (e) => {
       if (e.target.classList.contains("number")) {
-        this.mathClicked = false;
-        this.firstValue = parseInt(e.target.innerText);
-        this.displayValue = this.firstValue;
+        if (!this.mathClicked) {
+          this.firstNumber == 0
+            ? (this.firstNumber = e.target.innerText)
+            : (this.firstNumber += e.target.innerText);
+
+          this.displayValue = this.firstNumber;
+        } else {
+          this.secondNumber == 0
+            ? (this.secondNumber = e.target.innerText)
+            : (this.secondNumber += e.target.innerText);
+          this.displayValue = this.secondNumber;
+        }
         this.updateDisplay();
       } else if (e.target.innerText == "=") {
-        this.numbers.push(parseInt(this.display.value));
-        this.mathClicked = true;
+        this.mathClicked = false;
         this.math(this.clickedMathMark);
       } else if (e.target.classList.contains("math")) {
-        this.numbers.push(parseInt(this.display.value));
+        if (this.mathClicked) {
+          this.math(this.clickedMathMark);
+          this.firstNumber = this.displayValue;
+          this.secondNumber = 0;
+        }
         this.mathClicked = true;
-        this.firstValue = parseInt(e.target.innerText);
-        this.displayValue = this.numbers[this.numbers.length - 1];
         this.clickedMathMark = e.target.innerText;
-        this.firstValue = this.displayValue = 0;
+        this.displayValue = 0;
         this.updateDisplay();
       }
     });
@@ -48,26 +56,22 @@ const calculator = {
 
   updateDisplay() {
     if (!this.mathClicked) {
-      this.display.value == 0
-        ? (this.display.value = this.displayValue)
-        : (this.display.value += this.displayValue);
+      this.display.value = this.displayValue;
     } else {
       this.display.value = this.displayValue;
     }
   },
 
   addition() {
-    for (let i = 0; i < this.numbers.length; i++) {
-      this.displayValue += this.numbers[i];
-    }
+    this.display.value = this.displayValue =
+      parseInt(this.firstNumber) + parseInt(this.secondNumber);
     this.updateDisplay();
   },
+
   subtract() {
-    let result = this.numbers[0];
-    for (let i = 1; i < this.numbers.length; i++) {
-      result -= this.numbers[i];
-    }
-    this.displayValue = result;
+    this.display.value = this.displayValue =
+      parseInt(this.firstNumber) - parseInt(this.secondNumber);
+    this.updateDisplay();
     this.updateDisplay();
   },
 
