@@ -98,3 +98,7 @@ button {
 .color {
   color: #01acb4;
 }
+
+.color > i {
+  pointer-events: none;
+}
