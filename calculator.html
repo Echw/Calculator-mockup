@@ -9,44 +9,44 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <title>Document</title>
+  <title>Calculator</title>
 </head>
 
 <body>
-  <div class="panel">
+  <main class="panel">
     <div class="result">
       <input type="text" name="display" id="display" disabled />
     </div>
     <section class="buttons">
       <div class="wrap1">
-        <button class="color clear">C</button>
-        <button class="color math">/</button>
-        <button class="color math">x</button>
-        <button class="color remove"><i class="fas fa-backspace"></i></button>
+        <button class="color" data-button="clear">C</button>
+        <button class="color" data-button="math">/</button>
+        <button class="color" data-button="math">x</button>
+        <button class="color" data-button="remove"><i class="fas fa-backspace"></i></button>
       </div>
       <div class="wrap2">
-        <button class="number">1</button>
-        <button class="number">2</button>
-        <button class="number">3</button>
-        <button class="number">4</button>
-        <button class="number">5</button>
-        <button class="number">6</button>
-        <button class="number">7</button>
-        <button class="number">8</button>
-        <button class="number">9</button>
+        <button class="number" data-button="number">1</button>
+        <button class="number" data-button="number">2</button>
+        <button class="number" data-button="number">3</button>
+        <button class="number" data-button="number">4</button>
+        <button class="number" data-button="number">5</button>
+        <button class="number" data-button="number">6</button>
+        <button class="number" data-button="number">7</button>
+        <button class="number" data-button="number">8</button>
+        <button class="number" data-button="number">9</button>
       </div>
       <div class="wrap3">
-        <button class="color math">-</button>
-        <button class="color math">+</button>
-        <button class="last math">=</button>
+        <button class="color" data-button="math">-</button>
+        <button class="color" data-button="math">+</button>
+        <button class="last" data-button="equal">=</button>
       </div>
       <div class="wrap4">
-        <button class="color math">%</button>
-        <button class="number">0</button>
-        <button class="color">.</button>
+        <button class="color" data-button="math">%</button>
+        <button class="number" data-button="number">0</button>
+        <button class="color " data-button="dot">.</button>
       </div>
     </section>
-  </div>
+  </main>
   <script src="code.js"></script>
 </body>
 
