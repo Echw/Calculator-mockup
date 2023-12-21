@@ -10,14 +10,20 @@ const calculator = {
   dotFirstAdded: false,
   dotSecondAdded: false,
 
+  init() {
+    this.initEventListeners();
+    this.updateDisplay();
+  },
+
   initEventListeners() {
     this.buttons.addEventListener("click", (event) => {
       this.clickedButton(event.target);
     });
   },
 
-  clickedButton(button) {
+  handleButtonClick(button) {
     const clicked = button.dataset.button;
+
     switch (clicked) {
       case "number":
         if (!this.clickedMathMark) {
@@ -34,6 +40,7 @@ const calculator = {
         }
         this.updateDisplay();
         break;
+
       case "remove":
         if (this.firstNumber.slice(-1) == ".") {
           this.dotFirstAdded = false;
@@ -58,6 +65,7 @@ const calculator = {
         }
         this.updateDisplay();
         break;
+
       case "equal":
         this.calculate(this.clickedMathMark);
         this.firstNumber = this.displayValue;
@@ -71,20 +79,20 @@ const calculator = {
         this.dotAdded = false;
         this.updateDisplay();
         break;
+
       case "dot":
         if (!this.clickedMathMark && !this.dotFirstAdded) {
           this.dotFirstAdded = true;
           this.firstNumber += button.innerText;
           this.displayValue = this.firstNumber;
-        } else {
-          if (!this.dotSecondAdded) {
-            this.dotSecondAdded = true;
-            this.secondNumber += button.innerText;
-            this.displayValue = this.secondNumber;
-          }
+        } else if (!this.dotSecondAdded) {
+          this.dotSecondAdded = true;
+          this.secondNumber += button.innerText;
+          this.displayValue = this.secondNumber;
         }
         this.updateDisplay();
         break;
+
       case "math":
         if (this.clickedMathMark) {
           this.calculate(this.clickedMathMark);
@@ -97,6 +105,7 @@ const calculator = {
         this.displayValue = 0;
         this.updateDisplay();
         break;
+
       default:
         break;
     }
@@ -155,11 +164,6 @@ const calculator = {
   percent() {
     this.displayValue =
       (parseFloat(this.firstNumber) * parseFloat(this.secondNumber)) / 100;
-    this.updateDisplay();
-  },
-
-  init() {
-    this.initEventListeners();
     this.updateDisplay();
   },
 };
